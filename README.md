@@ -1,14 +1,14 @@
 # flutter-skills
 
-A public Git-based repository of Flutter-focused Codex skills.
+A public repository of Flutter-focused Codex skills for code review and engineering quality checks.
 
 ## What this repo contains
 
-This repository currently publishes one review skill for Flutter codebases:
+This repository currently publishes one focused review skill for Flutter codebases:
 
-- `memory-leak`: Reviews Flutter and Dart changes for high-confidence memory leak and lifecycle violations.
+- `memory-leak`: Reviews Flutter and Dart changes for real memory leaks and lifecycle cleanup bugs.
 
-The skill is designed for code review and pre-merge checks, with emphasis on:
+It is designed for code review and pre-merge checks, with emphasis on:
 
 - undisposed controllers and disposable objects
 - retained listeners and callbacks

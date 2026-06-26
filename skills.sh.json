@@ -3,8 +3,8 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Flutter",
-      "description": "Flutter code review and engineering skills.",
+      "title": "Flutter Code Review",
+      "description": "Flutter review skills for lifecycle safety, memory leak detection, and reliability.",
       "skills": [
         "memory-leak"
       ]

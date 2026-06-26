@@ -1,6 +1,6 @@
 ---
 name: memory-leak
-description: Review Flutter and Dart code for high-confidence memory leak and lifecycle violations only. Use when auditing Flutter diffs, pull requests, widgets, controllers, notifiers, timers, subscriptions, overlays, image streams, or disposable objects for not-disposed and not-GCed leaks, especially during code review or pre-merge checks.
+description: Find high-confidence Flutter and Dart memory leaks and lifecycle cleanup bugs during code review. Use when auditing pull requests, widget code, controllers, notifiers, timers, subscriptions, overlays, image streams, and other disposable objects for not-disposed or not-GCed leaks.
 ---
 
 # Memory Leak
