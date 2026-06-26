@@ -27,6 +27,17 @@ Ignore the following:
 - Formatting-only changes
 - Deletion-only changes
 
+## Project-specific wrappers
+
+The following are project-local classes, not Flutter SDK widgets. Do not treat them as official framework components.
+
+If the review depends on the exact implementation, read [references/project-wrappers.md](references/project-wrappers.md) for the full local class definitions of `TwOverlayContextView`, `TwAutoDisposeRichText`, `TwAutoTextSpan`, and `TwAutoWidgetSpan`.
+
+- `TwAutoDisposeRichText` is a project `StatefulWidget` wrapper around `Text.rich`. It accepts `List<AutoRichSpan>` and internally creates `TapGestureRecognizer` instances for tappable text spans. Its state owns a `_recognizers` list and disposes those recognizers in both `didUpdateWidget` and `dispose()`.
+- `TwAutoTextSpan` is a project span model, not Flutter's built-in `TextSpan`. It carries `text`, `style`, `onTap`, `onTapDown`, `onTapUp`, and `onTapCancel`. When used inside `TwAutoDisposeRichText`, tappable spans are converted into managed `TapGestureRecognizer` instances.
+- `TwAutoWidgetSpan` is a sibling project span model used by `TwAutoDisposeRichText` for inline widgets. It is not itself a leak-sensitive object, but it helps confirm that the project expects rich text to be built through this wrapper instead of manually wiring recognizers into raw `TextSpan`.
+- `TwOverlayContextView` is a project `StatefulWidget` that builds an `Overlay` and stores an internal `OverlayEntry? _overlayEntry`. Its state explicitly calls `_overlayEntry?.remove()`, `_overlayEntry?.dispose()`, and then clears the field in `dispose()`. Prefer this wrapper when the page only needs an overlay-mounted `BuildContext`.
+
 ## Review Order
 
 Review findings in the following order, from highest to lowest priority.
@@ -35,7 +46,7 @@ Review findings in the following order, from highest to lowest priority.
 
 - Check objects such as `TextEditingController`, `ScrollController`, `FocusNode`, `AnimationController`, `EasyRefreshController`, `FixedExtentScrollController`, `PageController`, `TabController`, and `TrainHoppingAnimation`. Verify that each one is disposed in the matching `logic.onDispose()` or `State.dispose()`.
 - Flag inline controller creation such as `CupertinoPicker(scrollController: FixedExtentScrollController())`. It must be stored in a field and manually disposed, because the widget does not dispose it automatically.
-- Flag manual `GestureRecognizer` creation, including `TapGestureRecognizer` and `LongPressGestureRecognizer`, especially inside `build` or `_buildXxx()` methods. Prefer the project wrapper `TwAutoDisposeRichText + TwAutoTextSpan`.
+- Flag manual `GestureRecognizer` creation, including `TapGestureRecognizer` and `LongPressGestureRecognizer`, especially inside `build` or `_buildXxx()` methods. Prefer the project wrapper combination `TwAutoDisposeRichText + TwAutoTextSpan` because that local widget owns recognizer creation and disposal automatically. If inline widgets are needed in the same rich text, the project sibling class is `TwAutoWidgetSpan`.
 - If code manually calls `BoxDecoration.createBoxPainter()`, verify that the returned `BoxPainter` is later disposed with `boxPainter.dispose()`.
 
 ### 2. Recreated `CurvedAnimation` leaks
@@ -74,7 +85,7 @@ Review findings in the following order, from highest to lowest priority.
 ### 7. Unremoved `OverlayEntry`
 
 - If a page owns an `OverlayEntry`, verify that `entry.remove()` is called in `State.dispose()`, and that the field is cleared afterward.
-- If a page only needs to provide a `BuildContext` for overlay mounting, prefer the project wrapper `TwOverlayContextView` instead of handwritten `Overlay(initialEntries: [...])` plus `OverlayEntry`.
+- If a page only needs to provide a `BuildContext` for overlay mounting, prefer the project wrapper `TwOverlayContextView` instead of handwritten `Overlay(initialEntries: [...])` plus `OverlayEntry`, because `TwOverlayContextView` already owns and disposes its internal `OverlayEntry`.
 - When using `top_snackbar_flutter`, verify that `_overlayEntry` is manually removed in `dispose()` if the page can be destroyed before the snackbar dismisses itself.
 
 ### 8. `not-GCed`: disposed objects still retained
