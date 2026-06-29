@@ -24,6 +24,10 @@ Skills live under `skills/<skill-name>/` so they can be discovered by Git-based 
 skills/
   memory-leak/
     SKILL.md
+    references/
+      project-conventions.md
+      project-wrappers.md
+      examples.md
     agents/
       openai.yaml
 ```
@@ -70,3 +74,9 @@ In practice, the usual flow is:
 The published skill definition is here:
 
 - [skills/memory-leak/SKILL.md](skills/memory-leak/SKILL.md)
+
+Reference files loaded on demand:
+
+- [skills/memory-leak/references/project-conventions.md](skills/memory-leak/references/project-conventions.md) — optional project-specific rules
+- [skills/memory-leak/references/project-wrappers.md](skills/memory-leak/references/project-wrappers.md) — local wrapper implementations
+- [skills/memory-leak/references/examples.md](skills/memory-leak/references/examples.md) — true-positive and false-positive patterns

@@ -1,6 +1,6 @@
 # Project-specific wrappers
 
-Read this file when the review depends on understanding the exact implementation details of the project's local rich-text or overlay wrappers.
+Read this file when the review depends on understanding the exact implementation details of the project's local rich-text or overlay wrappers. For ownership rules and package bans, see [project-conventions.md](project-conventions.md).
 
 These classes are project-local helpers, not Flutter SDK components.
 
