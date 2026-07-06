@@ -1,4 +1,4 @@
-# Flutter Widget Split Examples
+# Widget Split Examples
 
 Use these examples when the target refactor needs a concrete before/after pattern. Keep examples in official Flutter terms even if the user's project contains custom widgets.
 

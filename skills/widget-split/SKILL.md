@@ -1,9 +1,9 @@
 ---
-name: flutter-widget-split
+name: widget-split
 description: Refactor Flutter widget-building methods into readable, behavior-preserving layers by replacing deeply nested official Flutter widget chains with stepwise `resultWidget` assignments and focused private `_buildXxx()` helpers. Use when a Dart `build()` or `_buildXxx()` method returns nested `Padding`, `Container`, `Align`, `DecoratedBox`, `GestureDetector`, `Visibility`, `Expanded`, `Flexible`, `Positioned`, `Row`, `Column`, `Stack`, `Builder`, `AnimatedBuilder`, `ValueListenableBuilder`, `FutureBuilder`, or `StreamBuilder` trees and Codex needs to split them without changing layout, callbacks, keys, semantics, or state flow.
 ---
 
-# Flutter Widget Split
+# Widget Split
 
 Refactor for readability, not redesign. Preserve the rendered tree, widget order, keys, callbacks, semantics, and state ownership.
 

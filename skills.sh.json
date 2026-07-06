@@ -6,7 +6,7 @@
       "title": "Flutter Refactoring",
       "description": "Refactoring skills for splitting nested Flutter widget trees into maintainable builders.",
       "skills": [
-        "flutter-widget-split"
+        "widget-split"
       ]
     },
     {

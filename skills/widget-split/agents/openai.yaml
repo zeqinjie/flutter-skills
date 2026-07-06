@@ -1,0 +1,7 @@
+interface:
+  display_name: "Flutter Widget Split"
+  short_description: "Refactor nested Flutter widget trees"
+  default_prompt: "Use $widget-split to refactor this Flutter widget tree into smaller `_buildXxx()` methods and stepwise `resultWidget` wrapping without changing behavior."
+
+policy:
+  allow_implicit_invocation: true
