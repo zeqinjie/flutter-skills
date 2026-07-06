@@ -3,6 +3,13 @@
   "notGrouped": "bottom",
   "groupings": [
     {
+      "title": "Flutter Refactoring",
+      "description": "Refactoring skills for splitting nested Flutter widget trees into maintainable builders.",
+      "skills": [
+        "flutter-widget-split"
+      ]
+    },
+    {
       "title": "Flutter Code Review",
       "description": "Flutter review skills for lifecycle safety, memory leak detection, and reliability.",
       "skills": [
